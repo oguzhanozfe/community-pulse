@@ -16,12 +16,12 @@ python -m community_pulse demo        # Python 3.10+, stdlib only, no key needed
 It picks a model backend by itself:
 
 1. `GEMINI_API_KEY` set (or `CP_PROVIDER` chosen): that cloud model;
-2. otherwise a local Ollama at `127.0.0.1:11434` with `qwen3.5:9b` and `qwen3-embedding:0.6b` pulled
-   (a full local run takes several minutes);
+2. `--live` passed and a local Ollama at `127.0.0.1:11434` has `qwen3.5:9b` and `qwen3-embedding:0.6b`
+   pulled: local models (a full local run takes several minutes);
 3. otherwise **replay** of the recorded `gemini-3.1-flash-lite` / `gemini-embedding-2` responses in
    [`examples/helldivers2/replay.json.gz`](examples/helldivers2/replay.json.gz), printed as
-   `mode: replay (recorded ..., 2026-11-17)`. Replay takes about a second and reproduces the committed
-   `result.json` and dashboard byte for byte. `--replay` forces this mode. CI runs it on every push.
+   `mode: replay (recorded ..., 2026-11-17)` with a hint on how to run live. Replay takes about a second
+   and reproduces the committed `result.json` and dashboard byte for byte. CI runs it on every push.
 
 ## What it does
 
@@ -137,7 +137,9 @@ each name for that reason.
 
 **Cyberpunk 2077 (not finished).** [`examples/cyberpunk2077/input.json`](examples/cyberpunk2077/input.json)
 holds 810 reviews from 24 Sep to 16 Nov 2026 (patch 2.5 on 22 Oct). Its run stopped when both free
-Gemini embedding models hit their shared daily quota. Rerun it with
+Gemini embedding models hit their shared daily quota: sentiment for all 810 reviews is recorded, but only
+4 of the 9 embedding batches, and the topic names need those embeddings first. A chat-only free lane
+cannot fill the gap without mixing embedding models within one run, so it waits for the Gemini quota. Rerun it with
 `python -m community_pulse run --input examples/cyberpunk2077/input.json --game "Cyberpunk 2077" --out examples/cyberpunk2077`.
 55 of its reviews are in the sentiment eval set.
 

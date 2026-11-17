@@ -22,9 +22,9 @@ def main(argv=None):
     ap = argparse.ArgumentParser(prog="community_pulse")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
-    m = sub.add_parser("demo", help="bundled Helldivers 2 run; no key needed (key -> Ollama -> recorded replay)")
+    m = sub.add_parser("demo", help="bundled Helldivers 2 run; no key needed (cloud key -> Ollama with --live -> recorded replay)")
     m.add_argument("--out", default="out/demo")
-    m.add_argument("--replay", action="store_true", help="skip key/Ollama detection and replay the recording")
+    m.add_argument("--live", action="store_true", help="use local Ollama when no cloud key is set (slow)")
 
     f = sub.add_parser("fetch-steam", help="sample Steam reviews + patch dates (no key needed)")
     f.add_argument("--appid", type=int, required=True)
@@ -56,7 +56,7 @@ def main(argv=None):
 
     a = ap.parse_args(argv)
     if a.cmd == "demo":
-        print(models.resolve_backend(EXAMPLE / "replay.json.gz", force_replay=a.replay))
+        print(models.resolve_backend(EXAMPLE / "replay.json.gz", live=a.live))
         a = ap.parse_args(["run", "--input", str(EXAMPLE / "input.json"), "--game", "Helldivers 2",
                            "--out", a.out, "--eval-results", str(ROOT / "eval/results.json")])
     if a.cmd == "fetch-steam":

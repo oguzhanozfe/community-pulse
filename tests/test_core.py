@@ -185,8 +185,9 @@ class Demo(unittest.TestCase):
         from community_pulse import __main__ as cli
         saved = (dict(models.REPLAY), models.PROVIDER, models.EMBED_PROVIDER, models.CHAT_MODEL, models.EMBED_MODEL)
         try:
-            with tempfile.TemporaryDirectory() as d, mock.patch("builtins.print"):
-                cli.main(["demo", "--replay", "--out", d])
+            with tempfile.TemporaryDirectory() as d, mock.patch("builtins.print"), \
+                    mock.patch.dict(os.environ, {"GEMINI_API_KEY": "", "CP_PROVIDER": ""}):
+                cli.main(["demo", "--out", d])
                 got = json.loads(pathlib.Path(d, "result.json").read_text())
         finally:
             models.REPLAY.clear(); models.REPLAY.update(saved[0])

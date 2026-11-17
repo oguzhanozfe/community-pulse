@@ -94,17 +94,18 @@ def ollama_ready() -> bool:
     return {PROVIDERS["ollama"]["chat"], PROVIDERS["ollama"]["embed"]} <= have
 
 
-def resolve_backend(replay_path, force_replay: bool = False) -> str:
-    """Demo order: env key (or explicit CP_PROVIDER) -> local Ollama -> replay of recorded responses."""
-    if not force_replay and (os.environ.get("CP_PROVIDER") or os.environ.get(PROVIDERS["gemini"]["key"])):
+def resolve_backend(replay_path, live: bool = False) -> str:
+    """Demo order: cloud key (or explicit CP_PROVIDER) -> local Ollama if live=True -> replay of recordings."""
+    if os.environ.get("CP_PROVIDER") or os.environ.get(PROVIDERS["gemini"]["key"]):
         load_replay(replay_path)  # identical inputs reuse the recording instead of spending quota
         return f"mode: live ({PROVIDER}/{CHAT_MODEL}, embeddings {EMBED_PROVIDER}/{EMBED_MODEL})"
-    if not force_replay and ollama_ready():
+    if live and ollama_ready():
         use("ollama", "ollama")
         return f"mode: local Ollama ({CHAT_MODEL}, embeddings {EMBED_MODEL}); a full run takes several minutes"
     rec = load_replay(replay_path, only=True)
     use(rec["chat_provider"], rec["embed_provider"])
-    return f"mode: replay (recorded {rec['chat']} + {rec['embed']}, {rec['date']})"
+    return (f"mode: replay (recorded {rec['chat']} + {rec['embed']}, {rec['date']})\n"
+            "  run live: set GEMINI_API_KEY, or start Ollama and pass --live")
 
 
 def _cached(kind: str, model: str, payload, call):
