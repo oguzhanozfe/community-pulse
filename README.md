@@ -65,7 +65,7 @@ Tests run offline with no key and no model: `python -m unittest -v`.
 | env | default | options |
 | --- | --- | --- |
 | `CP_PROVIDER` (chat) | `gemini` (`GEMINI_API_KEY`) | `deepseek` (`DEEPSEEK_API_KEY`), `ollama` (local, no key) |
-| `CP_EMBED_PROVIDER` | `gemini` | `ollama` |
+| `CP_EMBED_PROVIDER` | `gemini` | `openrouter` (`OPENROUTER_API_KEY`, free `nvidia/nemotron-3.5-embed-8b:free`), `ollama` |
 | `CP_CHAT_MODEL` / `CP_EMBED_MODEL` | `gemini-3.1-flash-lite` / `gemini-embedding-2` (256 dims) | any model the backend serves |
 
 Every model response is cached on disk in `.cache/`, keyed by a hash of the model and the input, so a
@@ -135,13 +135,20 @@ moved the same way (15.4% → 76.2%), independently of the LLM labels.
 holds a single post, and the names are LLM summaries. The distinctive-word lists are shown next to
 each name for that reason.
 
-**Cyberpunk 2077 (not finished).** [`examples/cyberpunk2077/input.json`](examples/cyberpunk2077/input.json)
-holds 810 reviews from 24 Sep to 16 Nov 2026 (patch 2.5 on 22 Oct). Its run stopped when both free
-Gemini embedding models hit their shared daily quota: sentiment for all 810 reviews is recorded, but only
-4 of the 9 embedding batches, and the topic names need those embeddings first. A chat-only free lane
-cannot fill the gap without mixing embedding models within one run, so it waits for the Gemini quota. Rerun it with
-`python -m community_pulse run --input examples/cyberpunk2077/input.json --game "Cyberpunk 2077" --out examples/cyberpunk2077`.
-55 of its reviews are in the sentiment eval set.
+## Example: Cyberpunk 2077, 24 Sep to 16 Nov 2026 (real run)
+
+[`examples/cyberpunk2077/`](examples/cyberpunk2077/) holds 810 English Steam reviews (up to 15 per day),
+`result.json` and `dashboard.html`. Models: sentiment and topic names by `gemini-3.1-flash-lite`;
+embeddings by `nvidia/nemotron-3.5-embed-8b:free` through OpenRouter (256 dims), because the Gemini
+embedding quota ran out mid-run. All 409 topical posts were embedded with that one model, so the
+clusters are consistent. Topic clusters are therefore not comparable one-to-one with Helldivers 2's.
+
+- **Sanity check:** the LLM matched the reviewer's thumbs up/down on 97.2% of 690 polar reviews;
+  the lexicon matched 96.7% of 478.
+- **Update 2.5 (Edgerunners 2):** three announcements within 3 days were merged into one event,
+  anchored on the first one (the REDstreams preview, 20 Oct). With 105 reviews on each side, the
+  negative share went from 5.7% to 7.6% and no measure shifted (every p_adj = 1.0). Reviews of this
+  game were overwhelmingly positive before and after the update.
 
 ## Data handling
 
@@ -164,8 +171,11 @@ cannot fill the gap without mixing embedding models within one run, so it waits 
   posts are mostly memes. Reddit would add discussion, but it is untested against the live API.
 - **Before/after is association, not cause.** Patches cluster with sales, warbonds and news. Windows
   can overlap when patches are less than 14 days apart, and announcements within 3 days are merged.
-- **One example game.** Free-tier quota (about 20 requests per day per model, shared) ran out before the
-  second game finished. Large sentiment batches (150 posts per call) keep a full run to about 10 chat calls.
+- **Free-tier quota.** About 20 requests per day per Gemini model, shared, which is why the Cyberpunk 2077
+  run uses a different embedding model. Large sentiment batches (150 posts per call) keep a full run to
+  about 10 chat calls.
+- **Merged events are anchored on the first announcement** in the group, which can be a preview a few
+  days before the actual release.
 - **Topics depend on k** (8 by default) and on which posts are long enough (≥ 8 words). Cluster
   names are LLM summaries, so read the listed distinctive words next to them.
 - **The eval set is small and AI-labelled** (see above). English only.

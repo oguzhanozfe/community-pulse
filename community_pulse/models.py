@@ -19,11 +19,13 @@ PROVIDERS = {
                "chat": "gemini-3.1-flash-lite", "embed": "gemini-embedding-2", "interval": 4.5},
     "deepseek": {"base": "https://api.deepseek.com/v1", "key": "DEEPSEEK_API_KEY",
                  "chat": "deepseek-chat", "embed": None, "interval": 0.5},
+    "openrouter": {"base": "https://openrouter.ai/api/v1", "key": "OPENROUTER_API_KEY",
+                   "chat": None, "embed": "nvidia/nemotron-3.5-embed-8b:free", "interval": 3.0},
     "ollama": {"base": os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434") + "/v1", "key": None,
                "chat": "qwen3.5:9b", "embed": "qwen3-embedding:0.6b", "interval": 0.0},
 }
 PROVIDER = os.environ.get("CP_PROVIDER", "gemini")              # chat: gemini | deepseek | ollama
-EMBED_PROVIDER = os.environ.get("CP_EMBED_PROVIDER", "gemini")  # embeddings: gemini | ollama
+EMBED_PROVIDER = os.environ.get("CP_EMBED_PROVIDER", "gemini")  # embeddings: gemini | openrouter | ollama
 CHAT_MODEL = os.environ.get("CP_CHAT_MODEL") or PROVIDERS[PROVIDER]["chat"]
 EMBED_MODEL = os.environ.get("CP_EMBED_MODEL") or PROVIDERS[EMBED_PROVIDER]["embed"]
 LABELS = ("positive", "negative", "neutral")
