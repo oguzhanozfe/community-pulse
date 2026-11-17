@@ -143,11 +143,27 @@ def two_prop_p(x1: int, n1: int, x2: int, n2: int) -> float | None:
     return math.erfc(abs(z) / math.sqrt(2))
 
 
-def verdict(p_adj, n1, n2, x1=None, x2=None) -> str:
+def fisher_p(x1: int, n1: int, x2: int, n2: int) -> float:
+    """Two-sided Fisher exact p for a 2x2 table; used when a cell is under 5."""
+    k, n = x1 + x2, n1 + n2
+    total = math.comb(n, k)
+    pmf = lambda a: math.comb(n1, a) * math.comb(n2, k - a) / total
+    p0 = pmf(x1)
+    lo, hi = max(0, k - n2), min(k, n1)
+    return min(1.0, sum(pmf(a) for a in range(lo, hi + 1) if pmf(a) <= p0 * (1 + 1e-9)))
+
+
+def prop_test(x1: int, n1: int, x2: int, n2: int) -> float | None:
+    if not n1 or not n2:
+        return None
+    if min(x1, x2, n1 - x1, n2 - x2) < 5:
+        return fisher_p(x1, n1, x2, n2)
+    return two_prop_p(x1, n1, x2, n2)
+
+
+def verdict(p_adj, n1, n2) -> str:
     if min(n1, n2) < MIN_N:
         return "too few posts"
-    if x1 is not None and min(x1, x2, n1 - x1, n2 - x2) < 5:
-        return "too few posts"  # normal approximation unreliable
     return "likely shift" if p_adj is not None and p_adj < 0.05 else "no clear shift"
 
 
@@ -165,6 +181,7 @@ def merge_events(events: list[dict], min_gap_days: float = 3) -> list[dict]:
 def event_shift(records: list[dict], event_ts: int, topics: dict, window_days: int = 7) -> dict:
     """Compare the `window_days` before vs after an event: negative share and each topic's share.
 
+    Two-proportion z-test, or Fisher's exact test when a cell is under 5;
     p-values are Bonferroni-adjusted across the tests run for this event. Proportions are
     of *sampled* posts, so they show mix and mood, not volume.
     """
@@ -179,7 +196,7 @@ def event_shift(records: list[dict], event_ts: int, topics: dict, window_days: i
         tests.append({"name": name, "kind": kind, "before": x1, "after": x2,
                       "share_before": round(x1 / n1, 3) if n1 else None,
                       "share_after": round(x2 / n2, 3) if n2 else None,
-                      "p": two_prop_p(x1, n1, x2, n2)})
+                      "p": prop_test(x1, n1, x2, n2)})
 
     add("negative sentiment", lambda r: r["sentiment"] == "negative", "sentiment")
     if all(r.get("voted_up") is not None for r in before + after):
@@ -189,7 +206,7 @@ def event_shift(records: list[dict], event_ts: int, topics: dict, window_days: i
     m = len(tests)
     for t in tests:
         t["p_adj"] = None if t["p"] is None else min(1.0, t["p"] * m)
-        t["verdict"] = verdict(t["p_adj"], n1, n2, t["before"], t["after"])
+        t["verdict"] = verdict(t["p_adj"], n1, n2)
         t["p"] = None if t["p"] is None else round(t["p"], 4)
         t["p_adj"] = None if t["p_adj"] is None else round(t["p_adj"], 4)
     return {"n_before": n1, "n_after": n2, "window_days": window_days, "tests": tests}

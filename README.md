@@ -9,7 +9,7 @@ news feed. It then:
 2. groups longer posts into topics (embedding clusters, each named by an LLM),
 3. builds daily and weekly time series per topic, and
 4. compares the 7 days before each patch with the 7 days after: sample sizes, two-proportion tests,
-   Bonferroni correction, and an explicit "too few posts" verdict instead of a guess.
+   Bonferroni correction, Fisher's exact test for small cells, and an explicit "too few posts" verdict instead of a guess.
 
 The output is a `result.json` and a static `dashboard.html` (inline SVG, no JavaScript, no CDN).
 
@@ -43,7 +43,7 @@ Tests run offline with no key and no model: `python -m unittest -v`.
 | --- | --- | --- |
 | `CP_PROVIDER` (chat) | `gemini` (`GEMINI_API_KEY`) | `deepseek` (`DEEPSEEK_API_KEY`), `ollama` (local, no key) |
 | `CP_EMBED_PROVIDER` | `gemini` | `ollama` |
-| `CP_CHAT_MODEL` / `CP_EMBED_MODEL` | `gemini-3.1-flash-lite` / `gemini-embedding-001` | any model the backend serves |
+| `CP_CHAT_MODEL` / `CP_EMBED_MODEL` | `gemini-3.1-flash-lite` / `gemini-embedding-2` (256 dims) | any model the backend serves |
 
 Every model response is cached on disk in `.cache/`, keyed by a hash of the model and the input, so a
 rerun spends no quota. Sentiment is requested in batches of 150 posts per call to fit free-tier
@@ -80,7 +80,43 @@ in [`eval/labels.jsonl`](eval/labels.jsonl) and the scores in [`eval/results.jso
   (Claude Opus) reviewed all 110. **No human annotator was involved.** Treat this as a sanity check,
   not a benchmark. About ten items are genuinely ambiguous, and those carry a `note`.
 
-EXAMPLES_PLACEHOLDER
+## Example: Helldivers 2, 1 Sep to 16 Nov 2026 (real run)
+
+[`examples/helldivers2/`](examples/helldivers2/) holds the input (1,151 English Steam reviews,
+up to 15 per day, fetched 2026-11-17), `result.json` and `dashboard.html`. Models: sentiment and
+topic names by `gemini-3.1-flash-lite`, embeddings by `gemini-embedding-2` (256 dims). Both are
+recorded in `result.json`.
+
+**Sanity check at scale.** On the 1,022 reviews it labelled positive or negative, the LLM matched the
+reviewer's own thumbs up/down 98.2% of the time. The lexicon baseline matched 78.5%, but only on the
+674 reviews it did not call neutral. Steam's vote is not ground truth for text sentiment, but it is
+a large-sample check that the labels track something real.
+
+**Before vs after patches** (±7 days, Bonferroni-adjusted within each event):
+
+| patch (Steam announcement) | n before / after | negative share | verdict |
+| --- | --- | --- | --- |
+| 7.1.0 + 7.1.1 (22 Sep) | 105 / 104 | 10.5% → 15.4% | no clear shift |
+| **7.2.0 + 7.2.1 (20 Oct)** | 104 / 105 | **18.3% → 73.3%** | **likely shift** (p_adj < 0.001) |
+| 7.2.2 (29 Oct) | 105 / 105 | 74.3% → 76.2% | no clear shift |
+| 7.2.3 (11 Nov) | 105 / 90 | 69.5% → 65.6% | no clear shift |
+
+Around 7.2.0, two developer-criticism clusters grew from 4 to 32 and from 10 to 31 posts out of
+about 105 (p_adj < 0.001 and 0.003). Their most distinctive words are *arrowhead, devs, fix, mods,
+update*. The same week's Steam news includes "Changing anti-cheat in HELLDIVERS 2", and 30 of the 105
+sampled reviews in the week after mention anti-cheat, against 3 of 104 the week before (a regex count). The tool reports the association only.
+It does not establish that the anti-cheat change caused the shift. The share of thumbs-down votes
+moved the same way (15.4% → 76.2%), independently of the LLM labels.
+
+**Topic quality is mixed.** Two of the 8 clusters are near-duplicates (both developer criticism), one
+holds a single post, and the names are LLM summaries. The distinctive-word lists are shown next to
+each name for that reason.
+
+**Cyberpunk 2077 (not finished).** [`examples/cyberpunk2077/input.json`](examples/cyberpunk2077/input.json)
+holds 810 reviews from 24 Sep to 16 Nov 2026 (patch 2.5 on 22 Oct). Its run stopped when both free
+Gemini embedding models hit their shared daily quota. Rerun it with
+`python -m community_pulse run --input examples/cyberpunk2077/input.json --game "Cyberpunk 2077" --out examples/cyberpunk2077`.
+55 of its reviews are in the sentiment eval set.
 
 ## Data handling
 
@@ -103,6 +139,8 @@ EXAMPLES_PLACEHOLDER
   posts are mostly memes. Reddit would add discussion, but it is untested against the live API.
 - **Before/after is association, not cause.** Patches cluster with sales, warbonds and news. Windows
   can overlap when patches are less than 14 days apart, and announcements within 3 days are merged.
+- **One example game.** Free-tier quota (about 20 requests per day per model, shared) ran out before the
+  second game finished. Large sentiment batches (150 posts per call) keep a full run to about 10 chat calls.
 - **Topics depend on k** (8 by default) and on which posts are long enough (≥ 8 words). Cluster
   names are LLM summaries, so read the listed distinctive words next to them.
 - **The eval set is small and AI-labelled** (see above). English only.

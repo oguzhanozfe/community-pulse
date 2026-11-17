@@ -85,6 +85,11 @@ class Analysis(unittest.TestCase):
         self.assertAlmostEqual(A.two_prop_p(50, 100, 50, 100), 1.0)
         self.assertLess(A.two_prop_p(10, 100, 40, 100), 0.001)
 
+    def test_fisher_matches_known_value(self):
+        # classic tea-tasting table [[3,1],[1,3]]: two-sided p = 0.4857
+        self.assertAlmostEqual(A.fisher_p(3, 4, 1, 4), 0.4857, places=3)
+        self.assertLess(A.prop_test(4, 105, 32, 105), 0.001)
+
     def test_merge_events(self):
         evs = A.merge_events([{"ts": 0, "title": "7.2.0"}, {"ts": 86400, "title": "7.2.1"},
                               {"ts": 10 * 86400, "title": "7.3.0"}])

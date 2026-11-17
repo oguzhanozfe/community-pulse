@@ -106,8 +106,8 @@ red dashed lines are patch announcements from the official Steam news feed.</p>
 <h2>Topic mix by week</h2><p class="muted">Share of topical posts (posts with at least 8 words) in each week.</p>
 <div class="wrap">{_topic_heatmap(res)}</div>
 <h2>Before vs after each patch</h2>
-<p class="muted">Two-proportion z-tests on sampled posts, Bonferroni-adjusted within each event. "too few posts" means a window
-had fewer than 30 posts or a cell under 5. A "likely shift" is a change in mix or mood around the date, not proof the patch caused it.</p>
+<p class="muted">Two-proportion z-tests on sampled posts (Fisher's exact test when a cell is under 5), Bonferroni-adjusted
+within each event. "too few posts" means a window had fewer than 30 posts. A "likely shift" is a change in mix or mood around the date, not proof the patch caused it.</p>
 {_events_table(res)}
 <h2>Topics</h2><ul>{topics}</ul>
 <h2>Sanity check against Steam votes</h2><ul>{ag}</ul>

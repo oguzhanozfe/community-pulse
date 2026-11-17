@@ -7,7 +7,7 @@ import json
 import pathlib
 import sys
 
-from . import dashboard, evaluate, models, pipeline, sources
+from . import analysis, dashboard, evaluate, models, pipeline, sources
 
 
 def _ts(s: str) -> int:
@@ -71,6 +71,11 @@ def main(argv=None):
         print(f"-> {out}/result.json, {out}/dashboard.html")
     elif a.cmd == "render":
         res = json.loads(pathlib.Path(a.result).read_text())
+        # recompute the before/after tests from saved posts (no model calls)
+        topics = {int(t): v for t, v in res["topics"].items()}
+        for e in res["events"]:
+            e["shift"] = analysis.event_shift(res["posts"], e["ts"], topics, e["shift"]["window_days"])
+        _write(a.result, res)
         summary = evaluate.summary_line(json.loads(pathlib.Path(a.eval_results).read_text())) if a.eval_results else None
         out = pathlib.Path(a.result).with_name("dashboard.html")
         out.write_text(dashboard.render(res, summary))

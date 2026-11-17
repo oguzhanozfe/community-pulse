@@ -15,7 +15,7 @@ import urllib.request
 # Every backend is reached through its OpenAI-compatible API, so switching is one env var.
 PROVIDERS = {
     "gemini": {"base": "https://generativelanguage.googleapis.com/v1beta/openai", "key": "GEMINI_API_KEY",
-               "chat": "gemini-3.1-flash-lite", "embed": "gemini-embedding-001", "interval": 4.5},
+               "chat": "gemini-3.1-flash-lite", "embed": "gemini-embedding-2", "interval": 4.5},
     "deepseek": {"base": "https://api.deepseek.com/v1", "key": "DEEPSEEK_API_KEY",
                  "chat": "deepseek-chat", "embed": None, "interval": 0.5},
     "ollama": {"base": os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434") + "/v1", "key": None,
@@ -30,7 +30,7 @@ USAGE = {"cache_hits": 0, "chat_calls": 0, "prompt_tokens": 0, "completion_token
 _last_call = {}
 
 
-def _post(provider: str, path: str, body: dict, timeout=120, retries=4) -> dict:
+def _post(provider: str, path: str, body: dict, timeout=120, retries=10) -> dict:
     """POST JSON with per-provider pacing; backs off on 429/5xx/timeouts. Keys come from env only."""
     cfg = PROVIDERS[provider]
     headers = {"Content-Type": "application/json"}
@@ -55,7 +55,8 @@ def _post(provider: str, path: str, body: dict, timeout=120, retries=4) -> dict:
                 raise RuntimeError(f"{provider}: daily quota exhausted for this model; try CP_CHAT_MODEL") from e
             if attempt == retries or (code is not None and code != 429 and code < 500):
                 raise
-            time.sleep(min(90, 5 * 2 ** attempt) * (0.5 + random.random()))  # jitter: shared quotas
+            # per-minute quotas need a full window; jitter because the key is shared
+            time.sleep((65 if code == 429 else min(90, 5 * 2 ** attempt)) * (0.75 + random.random() / 2))
 
 
 def model_info() -> dict:
@@ -102,10 +103,10 @@ def chat_json(prompt: str) -> dict:
     return parse_json(_cached("chat", f"{PROVIDER}/{CHAT_MODEL}", prompt, call))
 
 
-def embed(texts: list[str], dims: int = 256, batch: int = 100) -> list[list[float]]:
+def embed(texts: list[str], dims: int = 256, batch: int = 50) -> list[list[float]]:
     vecs = []
     for i in range(0, len(texts), batch):
-        chunk = [t[:1500] for t in texts[i:i + batch]]
+        chunk = [t[:500] for t in texts[i:i + batch]]  # small batches: free-tier tokens/minute
 
         def call():
             out = _post(EMBED_PROVIDER, "/embeddings", {"model": EMBED_MODEL, "dimensions": dims, "input": chunk})
