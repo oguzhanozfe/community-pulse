@@ -1,4 +1,4 @@
-"""CLI: python -m community_pulse {fetch-steam,fetch-reddit,run,eval} ..."""
+"""CLI: python -m community_pulse {demo,fetch-steam,fetch-reddit,run,render,eval} ..."""
 from __future__ import annotations
 
 import argparse
@@ -10,6 +10,10 @@ import sys
 from . import analysis, dashboard, evaluate, models, pipeline, sources
 
 
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+EXAMPLE = ROOT / "examples/helldivers2"
+
+
 def _ts(s: str) -> int:
     return int(dt.datetime.fromisoformat(s).replace(tzinfo=dt.timezone.utc).timestamp())
 
@@ -17,6 +21,10 @@ def _ts(s: str) -> int:
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="community_pulse")
     sub = ap.add_subparsers(dest="cmd", required=True)
+
+    m = sub.add_parser("demo", help="bundled Helldivers 2 run; no key needed (key -> Ollama -> recorded replay)")
+    m.add_argument("--out", default="out/demo")
+    m.add_argument("--replay", action="store_true", help="skip key/Ollama detection and replay the recording")
 
     f = sub.add_parser("fetch-steam", help="sample Steam reviews + patch dates (no key needed)")
     f.add_argument("--appid", type=int, required=True)
@@ -47,6 +55,10 @@ def main(argv=None):
     e.add_argument("--out", default="eval/results.json")
 
     a = ap.parse_args(argv)
+    if a.cmd == "demo":
+        print(models.resolve_backend(EXAMPLE / "replay.json.gz", force_replay=a.replay))
+        a = ap.parse_args(["run", "--input", str(EXAMPLE / "input.json"), "--game", "Helldivers 2",
+                           "--out", a.out, "--eval-results", str(ROOT / "eval/results.json")])
     if a.cmd == "fetch-steam":
         data = {"source": "steam", "appid": a.appid,
                 "fetched_at": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),

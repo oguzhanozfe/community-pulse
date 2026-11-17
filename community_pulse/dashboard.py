@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import json
 from html import escape
 
 W, H, PAD = 860, 240, 40
@@ -81,6 +82,7 @@ def _models(res) -> str:
 
 
 def render(res: dict, eval_summary: dict | None = None) -> str:
+    res = json.loads(json.dumps(res))  # str topic keys, same as a result reloaded from disk
     topics = "".join(
         f'<li><b>{escape(v["label"])}</b> ({v["size"]} posts) - {escape(v["description"])}'
         f' <span class="muted">[{escape(", ".join(v["terms"]))}]</span></li>'

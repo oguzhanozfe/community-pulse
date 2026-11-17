@@ -2,6 +2,29 @@
 
 Track what a game's players talk about and how they feel about it, lined up against patch dates.
 
+## Try it
+
+**[Live dashboard: Helldivers 2, Sep to Nov 2026](https://oguzhanozfe.github.io/community-pulse/)**: a real run on 1,151 Steam reviews.
+
+[![Helldivers 2 dashboard](docs/screenshot.png)](https://oguzhanozfe.github.io/community-pulse/)
+
+```bash
+python -m community_pulse demo        # Python 3.10+, stdlib only, no key needed
+```
+
+`demo` reruns the whole pipeline on the bundled Helldivers 2 data and writes `out/demo/dashboard.html`.
+It picks a model backend by itself:
+
+1. `GEMINI_API_KEY` set (or `CP_PROVIDER` chosen): that cloud model;
+2. otherwise a local Ollama at `127.0.0.1:11434` with `qwen3.5:9b` and `qwen3-embedding:0.6b` pulled
+   (a full local run takes several minutes);
+3. otherwise **replay** of the recorded `gemini-3.1-flash-lite` / `gemini-embedding-2` responses in
+   [`examples/helldivers2/replay.json.gz`](examples/helldivers2/replay.json.gz), printed as
+   `mode: replay (recorded ..., 2026-11-17)`. Replay takes about a second and reproduces the committed
+   `result.json` and dashboard byte for byte. `--replay` forces this mode. CI runs it on every push.
+
+## What it does
+
 community-pulse samples Steam reviews day by day and pulls official patch announcements from the Steam
 news feed. It then:
 
@@ -20,15 +43,15 @@ score. The useful questions are narrower. What did people start talking about af
 complaints move from crashes to anti-cheat? Is that change bigger than the noise? This tool answers
 those with numbers and their sample sizes, and it says when the sample is too small to answer.
 
-## Run it
+## Use a real model on your own data
 
-Python 3.10+, standard library only.
+Steam reviews and news need no key.
 
 ```bash
 # 1. Sample reviews (keyless public Steam Web API, ~1.5 s between calls)
 python -m community_pulse fetch-steam --appid 553850 --start 2026-09-01 --end 2026-11-17 --out data/hd2.json
 
-# 2. Analyse (needs one model backend, see below) and build the dashboard
+# 2. Analyse (needs a model backend, see below) and build the dashboard
 python -m community_pulse run --input data/hd2.json --game "Helldivers 2" --out out/hd2
 
 # 3. Sentiment accuracy on the hand-labelled set
@@ -37,7 +60,7 @@ python -m community_pulse eval
 
 Tests run offline with no key and no model: `python -m unittest -v`.
 
-**Model backends.** Every backend is called through its OpenAI-compatible API.
+**Model backends** (all optional for the demo). Every backend is called through its OpenAI-compatible API.
 
 | env | default | options |
 | --- | --- | --- |
@@ -49,11 +72,11 @@ Every model response is cached on disk in `.cache/`, keyed by a hash of the mode
 rerun spends no quota. Sentiment is requested in batches of 150 posts per call to fit free-tier
 request limits. Keys are read from the environment only and are never written to results.
 
-**Reddit.** `fetch-reddit --subreddit Helldivers` uses Reddit's official OAuth API (app-only
-`client_credentials`, `REDDIT_CLIENT_ID` / `REDDIT_CLIENT_SECRET`). It stays at 1 request/s and honours
-the `X-Ratelimit-*` headers. No credentials were available while this was built, so the Reddit path is
-tested only against `fixtures/reddit_listing_synthetic.json`. That fixture is **synthetic**: it is
-hand-written to the documented Listing shape and is not real Reddit data.
+**Reddit (optional adapter, not in the demo).** `fetch-reddit --subreddit Helldivers` uses Reddit's
+official OAuth API (app-only `client_credentials`, `REDDIT_CLIENT_ID` / `REDDIT_CLIENT_SECRET`). It stays
+at 1 request/s and honours the `X-Ratelimit-*` headers. No Reddit app was available while this was built,
+so the adapter is tested only against `fixtures/reddit_listing_synthetic.json`. That fixture is
+**synthetic**: it is hand-written to the documented Listing shape and is not real Reddit data.
 
 ## Measured results
 
@@ -159,7 +182,8 @@ community_pulse/
   evaluate.py   accuracy, CIs, McNemar, calibration
 fixtures/       recorded Steam responses (authors replaced) + synthetic Reddit listing
 eval/           labels.jsonl, results.json
-examples/       real runs: input.json, result.json, dashboard.html
+examples/       real runs: input.json, result.json, dashboard.html, replay.json.gz
+docs/           GitHub Pages copy of the Helldivers 2 dashboard + screenshot
 ```
 
 MIT licensed.

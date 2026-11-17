@@ -12,3 +12,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - run: python -m unittest -v
+      - name: demo (replay mode, no key, no model)
+        run: python -m community_pulse demo --out out/demo && cmp out/demo/dashboard.html examples/helldivers2/dashboard.html
+      - name: published dashboard matches the example
+        run: cmp docs/index.html examples/helldivers2/dashboard.html

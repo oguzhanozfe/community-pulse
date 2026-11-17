@@ -1,6 +1,7 @@
 """Model calls (Gemini by default; DeepSeek or Ollama optional) and the lexicon baseline."""
 from __future__ import annotations
 
+import gzip
 import hashlib
 import http.client
 import json
@@ -65,11 +66,55 @@ def model_info() -> dict:
 
 
 CACHE = pathlib.Path(os.environ.get("CP_CACHE", ".cache"))
+REPLAY = {"responses": {}, "only": False, "recorded": {}}  # committed recordings, see load_replay
+
+
+def load_replay(path, only: bool = False) -> dict:
+    """Load recorded model responses (gzip JSON). With only=True any unrecorded input is an error."""
+    data = json.loads(gzip.decompress(pathlib.Path(path).read_bytes()))
+    REPLAY["responses"].update(data["responses"])
+    REPLAY["recorded"], REPLAY["only"] = data["recorded"], only
+    return data["recorded"]
+
+
+def use(provider: str, embed_provider: str) -> None:
+    global PROVIDER, EMBED_PROVIDER, CHAT_MODEL, EMBED_MODEL
+    PROVIDER, EMBED_PROVIDER = provider, embed_provider
+    CHAT_MODEL = os.environ.get("CP_CHAT_MODEL") or PROVIDERS[provider]["chat"]
+    EMBED_MODEL = os.environ.get("CP_EMBED_MODEL") or PROVIDERS[embed_provider]["embed"]
+
+
+def ollama_ready() -> bool:
+    """True if a local Ollama answers and has both default models pulled."""
+    try:
+        with urllib.request.urlopen(PROVIDERS["ollama"]["base"][:-3] + "/api/tags", timeout=2) as r:
+            have = {m["name"] for m in json.load(r).get("models", [])}
+    except (OSError, ValueError):
+        return False
+    return {PROVIDERS["ollama"]["chat"], PROVIDERS["ollama"]["embed"]} <= have
+
+
+def resolve_backend(replay_path, force_replay: bool = False) -> str:
+    """Demo order: env key (or explicit CP_PROVIDER) -> local Ollama -> replay of recorded responses."""
+    if not force_replay and (os.environ.get("CP_PROVIDER") or os.environ.get(PROVIDERS["gemini"]["key"])):
+        load_replay(replay_path)  # identical inputs reuse the recording instead of spending quota
+        return f"mode: live ({PROVIDER}/{CHAT_MODEL}, embeddings {EMBED_PROVIDER}/{EMBED_MODEL})"
+    if not force_replay and ollama_ready():
+        use("ollama", "ollama")
+        return f"mode: local Ollama ({CHAT_MODEL}, embeddings {EMBED_MODEL}); a full run takes several minutes"
+    rec = load_replay(replay_path, only=True)
+    use(rec["chat_provider"], rec["embed_provider"])
+    return f"mode: replay (recorded {rec['chat']} + {rec['embed']}, {rec['date']})"
 
 
 def _cached(kind: str, model: str, payload, call):
     """Disk cache keyed by model + input hash, so reruns cost no quota."""
     key = hashlib.sha256(json.dumps([kind, model, payload], sort_keys=True).encode()).hexdigest()
+    if key in REPLAY["responses"]:
+        USAGE["cache_hits"] += 1
+        return REPLAY["responses"][key]
+    if REPLAY["only"]:
+        raise RuntimeError("replay mode has no recording for this input; set GEMINI_API_KEY or start Ollama")
     path = CACHE / kind / f"{key}.json"
     if path.exists():
         USAGE["cache_hits"] += 1

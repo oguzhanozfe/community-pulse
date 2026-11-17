@@ -177,3 +177,21 @@ class Parsing(unittest.TestCase):
         self.assertEqual(models.parse_json('<thought>{"x": 0} hmm</thought>```json\n{"a": 1}\n```'), {"a": 1})
         with self.assertRaises(ValueError):
             models.parse_json("no json here")
+
+
+class Demo(unittest.TestCase):
+    def test_replay_demo_reproduces_committed_example(self):
+        import tempfile
+        from community_pulse import __main__ as cli
+        saved = (dict(models.REPLAY), models.PROVIDER, models.EMBED_PROVIDER, models.CHAT_MODEL, models.EMBED_MODEL)
+        try:
+            with tempfile.TemporaryDirectory() as d, mock.patch("builtins.print"):
+                cli.main(["demo", "--replay", "--out", d])
+                got = json.loads(pathlib.Path(d, "result.json").read_text())
+        finally:
+            models.REPLAY.clear(); models.REPLAY.update(saved[0])
+            models.PROVIDER, models.EMBED_PROVIDER, models.CHAT_MODEL, models.EMBED_MODEL = saved[1:]
+        want = json.loads((FIX.parent / "examples/helldivers2/result.json").read_text())
+        self.assertEqual(got["models"]["usage"]["chat_calls"] + got["models"]["usage"]["embed_calls"], 0)
+        for k in ("topics", "events", "series_week", "agreement_with_steam_vote"):
+            self.assertEqual(got[k], want[k], k)
