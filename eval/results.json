@@ -1,0 +1,890 @@
+{
+ "chat_model": "gemini-3.1-flash-lite",
+ "models": {
+  "chat_provider": "gemini",
+  "chat": "gemini-3.1-flash-lite",
+  "embed_provider": "gemini",
+  "embed": "gemini-embedding-001",
+  "usage": {
+   "cache_hits": 0,
+   "chat_calls": 1,
+   "prompt_tokens": 4710,
+   "completion_tokens": 2542,
+   "embed_calls": 0
+  }
+ },
+ "gold_distribution": {
+  "positive": 71,
+  "negative": 15,
+  "neutral": 24
+ },
+ "llm": {
+  "n": 110,
+  "accuracy": 0.745,
+  "accuracy_ci95": [
+   0.657,
+   0.818
+  ],
+  "macro_f1": 0.666,
+  "confusion_gold_x_pred": {
+   "positive": {
+    "positive": 60,
+    "negative": 1,
+    "neutral": 10
+   },
+   "negative": {
+    "positive": 0,
+    "negative": 15,
+    "neutral": 0
+   },
+   "neutral": {
+    "positive": 11,
+    "negative": 6,
+    "neutral": 7
+   }
+  }
+ },
+ "lexicon": {
+  "n": 110,
+  "accuracy": 0.636,
+  "accuracy_ci95": [
+   0.543,
+   0.72
+  ],
+  "macro_f1": 0.613,
+  "confusion_gold_x_pred": {
+   "positive": {
+    "positive": 42,
+    "negative": 3,
+    "neutral": 26
+   },
+   "negative": {
+    "positive": 1,
+    "negative": 9,
+    "neutral": 5
+   },
+   "neutral": {
+    "positive": 2,
+    "negative": 3,
+    "neutral": 19
+   }
+  }
+ },
+ "majority_class": {
+  "n": 110,
+  "accuracy": 0.645,
+  "accuracy_ci95": [
+   0.553,
+   0.729
+  ],
+  "macro_f1": 0.262,
+  "confusion_gold_x_pred": {
+   "positive": {
+    "positive": 71,
+    "negative": 0,
+    "neutral": 0
+   },
+   "negative": {
+    "positive": 15,
+    "negative": 0,
+    "neutral": 0
+   },
+   "neutral": {
+    "positive": 24,
+    "negative": 0,
+    "neutral": 0
+   }
+  }
+ },
+ "llm_vs_lexicon_mcnemar_p": 0.1263,
+ "discordant": {
+  "llm_only_right": 32,
+  "lexicon_only_right": 20
+ },
+ "llm_calibration": {
+  "0.0-0.7": {
+   "n": 6,
+   "accuracy": 0.833
+  },
+  "0.7-0.9": {
+   "n": 23,
+   "accuracy": 0.304
+  },
+  "0.9-1.0": {
+   "n": 81,
+   "accuracy": 0.864
+  }
+ },
+ "items": [
+  {
+   "id": "steam:237971803",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 0.95,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:236273024",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:238580690",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:235425599",
+   "gold": "positive",
+   "llm": "negative",
+   "llm_conf": 0.85,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:235497036",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 0.95,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:237661402",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:234576381",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 1.0,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:236364400",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:236193837",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:235140344",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237410309",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238647024",
+   "gold": "neutral",
+   "llm": "neutral",
+   "llm_conf": 0.7,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:238060962",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237002908",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:236656420",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:240138761",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:239465923",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:236277693",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:236653043",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:236738085",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:238496654",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237166160",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.8,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237091103",
+   "gold": "neutral",
+   "llm": "negative",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:235431028",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:237085480",
+   "gold": "neutral",
+   "llm": "negative",
+   "llm_conf": 0.7,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:239823378",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237587106",
+   "gold": "neutral",
+   "llm": "neutral",
+   "llm_conf": 0.5,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:235229052",
+   "gold": "positive",
+   "llm": "neutral",
+   "llm_conf": 0.7,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:238580133",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237809483",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:238960392",
+   "gold": "neutral",
+   "llm": "neutral",
+   "llm_conf": 0.6,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237809958",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:240390021",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:239749466",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238961374",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 0.95,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:238498893",
+   "gold": "neutral",
+   "llm": "negative",
+   "llm_conf": 0.8,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:239657020",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237087035",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.8,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237008837",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:239554809",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238712092",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:235425148",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:240233434",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237006303",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:239467566",
+   "gold": "neutral",
+   "llm": "negative",
+   "llm_conf": 0.85,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:234573007",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:235795786",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 0.8,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238060050",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.8,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:234802046",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238872566",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:239823928",
+   "gold": "neutral",
+   "llm": "negative",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238646954",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:239749406",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.95,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:240389092",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237087745",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:236924906",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 1.0,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:238579386",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:239553030",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:240059512",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:235979996",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:238960246",
+   "gold": "positive",
+   "llm": "neutral",
+   "llm_conf": 0.7,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:240060808",
+   "gold": "neutral",
+   "llm": "neutral",
+   "llm_conf": 0.5,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:236737590",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 0.8,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:235357610",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:238712084",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238712371",
+   "gold": "positive",
+   "llm": "neutral",
+   "llm_conf": 0.7,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:235496291",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:239231532",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237734147",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238415028",
+   "gold": "neutral",
+   "llm": "negative",
+   "llm_conf": 0.8,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:235138570",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238340162",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237084631",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:238125477",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237663220",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 0.8,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:239897995",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 1.0,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:237807269",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.8,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237005337",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237417648",
+   "gold": "positive",
+   "llm": "neutral",
+   "llm_conf": 0.8,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:238499437",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237975162",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237417798",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237167588",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238874459",
+   "gold": "neutral",
+   "llm": "neutral",
+   "llm_conf": 0.5,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:239468950",
+   "gold": "positive",
+   "llm": "neutral",
+   "llm_conf": 0.7,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:240138012",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:234738802",
+   "gold": "positive",
+   "llm": "neutral",
+   "llm_conf": 0.7,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:235645384",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:239396387",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:234336021",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:239897739",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 1.0,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:235228330",
+   "gold": "positive",
+   "llm": "neutral",
+   "llm_conf": 0.6,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237002828",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237159263",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:239229747",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:239898656",
+   "gold": "positive",
+   "llm": "neutral",
+   "llm_conf": 0.8,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:240389760",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:239149571",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:234570121",
+   "gold": "neutral",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237735729",
+   "gold": "neutral",
+   "llm": "neutral",
+   "llm_conf": 0.5,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:237738233",
+   "gold": "positive",
+   "llm": "neutral",
+   "llm_conf": 0.8,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:234488612",
+   "gold": "neutral",
+   "llm": "neutral",
+   "llm_conf": 0.7,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:236432564",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237658498",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237505356",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 1.0,
+   "lexicon": "positive"
+  },
+  {
+   "id": "steam:237662447",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 1.0,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:236503420",
+   "gold": "positive",
+   "llm": "positive",
+   "llm_conf": 0.9,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:238778746",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 1.0,
+   "lexicon": "neutral"
+  },
+  {
+   "id": "steam:236363415",
+   "gold": "negative",
+   "llm": "negative",
+   "llm_conf": 1.0,
+   "lexicon": "negative"
+  },
+  {
+   "id": "steam:239468728",
+   "gold": "positive",
+   "llm": "neutral",
+   "llm_conf": 0.8,
+   "lexicon": "positive"
+  }
+ ]
+}

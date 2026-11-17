@@ -1,0 +1,142 @@
+{
+ "response": {
+  "query_summary": {
+   "num_reviews": 5,
+   "review_score": 4,
+   "review_score_desc": "Mostly Negative",
+   "total_positive": 152,
+   "total_negative": 384,
+   "total_reviews": 536
+  },
+  "reviews": [
+   {
+    "recommendationid": "206891487",
+    "author": {
+     "steamid": "00000000000000000",
+     "num_reviews": 1,
+     "playtime_forever": 100,
+     "playtime_last_two_weeks": 0,
+     "playtime_at_review": 100,
+     "last_played": 0
+    },
+    "language": "english",
+    "review": "Now having roughly 500 hours of in mission time having fought across multiple planets for over 2 years, I have gotten to see the many ups of the game and the lowest lows of it. And for me, it's finally time to give it up. Arrowhead has shown that they no longer care about the game or its community anymore.\n\nThere's not much to say about it other than this is not worth buying or playing anymore, at least not until Arrowhead decides it wants to stop being a neglectful parent.\n\nI never turned my back on Super Earth and its people, I turned my back on Arrowhead",
+    "timestamp_created": 1760659196,
+    "timestamp_updated": 1777158710,
+    "voted_up": false,
+    "votes_up": 18,
+    "votes_funny": 0,
+    "weighted_vote_score": 0.5888053178787231,
+    "comment_count": 0,
+    "steam_purchase": true,
+    "received_for_free": false,
+    "written_during_early_access": false,
+    "primarily_steam_deck": false,
+    "refunded": false
+   },
+   {
+    "recommendationid": "206891429",
+    "author": {
+     "steamid": "00000000000000001",
+     "num_reviews": 1,
+     "playtime_forever": 100,
+     "playtime_last_two_weeks": 0,
+     "playtime_at_review": 100,
+     "last_played": 0
+    },
+    "language": "english",
+    "review": "This game was very fun, especially with friends. Intense yet fun gameplay with lots of variety in how you can play. Unfortunately it seems arrowhead is throwing this away again. I don't usually decide to stop playing a game, maybe I'll take a long break after getting bored but I've stuck with TF2 when it was infested with bots and Sea of Thieves in spite of all its flaws. Unfortunately Helldivers 2, in the state it's in isn't playable for me. Unoptimization makes playing the game subject your pc to serious damage. Additionally, they've introduced several unfun enemies making every faction miserable to fight with most seeds. I would not suggest purchasing this game and to instead find something from a company that actually cares about its players and the stability of their game.",
+    "timestamp_created": 1760659115,
+    "timestamp_updated": 1760659115,
+    "voted_up": false,
+    "votes_up": 9,
+    "votes_funny": 1,
+    "weighted_vote_score": 0.49691393971443176,
+    "comment_count": 0,
+    "steam_purchase": true,
+    "received_for_free": false,
+    "written_during_early_access": false,
+    "primarily_steam_deck": false,
+    "refunded": false
+   },
+   {
+    "recommendationid": "206891408",
+    "author": {
+     "steamid": "00000000000000002",
+     "num_reviews": 1,
+     "playtime_forever": 100,
+     "playtime_last_two_weeks": 0,
+     "playtime_at_review": 100,
+     "last_played": 0
+    },
+    "language": "english",
+    "review": "Go play something else and come back in a few months and hopefully the devs drop a patch that makes the game not run like shit.",
+    "timestamp_created": 1760659078,
+    "timestamp_updated": 1760659078,
+    "voted_up": false,
+    "votes_up": 8,
+    "votes_funny": 0,
+    "weighted_vote_score": 0.5297614336013794,
+    "comment_count": 0,
+    "steam_purchase": true,
+    "received_for_free": false,
+    "written_during_early_access": false,
+    "primarily_steam_deck": false,
+    "refunded": false
+   },
+   {
+    "recommendationid": "206891383",
+    "author": {
+     "steamid": "00000000000000003",
+     "num_reviews": 1,
+     "playtime_forever": 100,
+     "playtime_last_two_weeks": 0,
+     "playtime_at_review": 100,
+     "last_played": 0
+    },
+    "language": "english",
+    "review": "Nov/15/2025: Big balance and optimzation update came around. And some of the more annoying enemies such as the Elevated overseer, Fleshmobs, War Striders and the Rupture strain got toned down and feel a lot better to fight. The rupture strain is still annoying but not as bad. And the light pen weapons got a a decent buff that makes them much more on par with the medium pen weapons.\n\nThe game has also finally been optimized and doesn't crash or lag nearly as much as it was the past few months. Definitely the right time to buy the game or hop back into it.\n\n\n\nOct/16/2025: As of writing this. I cannot recommend this game. Its poorly optimized and it doesn't and it seems the devs are steering the game back to being an unbalanced slogfest. The Illuminate haven't been balanced since they we're introduced with the exception of the Leviathan. The War Strider while not a terrible enemy still lacks weakpoints and also causes the game to crash if theres enough of them. \n\nI've also heard that the game has been bricking people's PC's hasn't happened to me yet but I'm not risking it. So I'm uninstalling HD2 for now and I'm gonna wait till it gets better. I do love the game. But no game is worth risking a $17,000 PC setup.",
+    "timestamp_created": 1760659034,
+    "timestamp_updated": 1763275463,
+    "voted_up": true,
+    "votes_up": 0,
+    "votes_funny": 0,
+    "weighted_vote_score": 0.49878716468811035,
+    "comment_count": 3,
+    "steam_purchase": true,
+    "received_for_free": false,
+    "written_during_early_access": false,
+    "primarily_steam_deck": false,
+    "refunded": false
+   },
+   {
+    "recommendationid": "206891335",
+    "author": {
+     "steamid": "00000000000000004",
+     "num_reviews": 1,
+     "playtime_forever": 100,
+     "playtime_last_two_weeks": 0,
+     "playtime_at_review": 100,
+     "last_played": 0
+    },
+    "language": "english",
+    "review": "Unprofessional and bumbling devs, and worse toxic positivism within the community. Apparently this game burning out PC hardware isn't an issue as long as players can keep getting ragdolled the entire match for the \"grunt fantasy\".",
+    "timestamp_created": 1760658957,
+    "timestamp_updated": 1760658957,
+    "voted_up": false,
+    "votes_up": 9,
+    "votes_funny": 0,
+    "weighted_vote_score": 0.5430810451507568,
+    "comment_count": 0,
+    "steam_purchase": true,
+    "received_for_free": false,
+    "written_during_early_access": false,
+    "primarily_steam_deck": false,
+    "refunded": false
+   }
+  ],
+  "cursor": "AoJ4rPTc95kDd5SdlQY=",
+  "total_matching": 536
+ },
+ "_note": "Recorded from IUserReviewsService/GetAppReviews/v1 (appid 553850) on 2026-11-17; author blocks replaced with placeholders."
+}

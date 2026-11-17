@@ -1,0 +1,171 @@
+{
+ "appnews": {
+  "appid": 553850,
+  "newsitems": [
+   {
+    "gid": "1849192144179767",
+    "title": "Arrowhead ответила на критику Easy Anti-Cheat в Helldivers 2 - косметические моды могут вернуть",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/PlayGround.ru - официальная группа/1849192144179767",
+    "is_external_url": true,
+    "author": "",
+    "contents": "После добавления Easy Anti-Cheat в Helldivers 2 пользователи Steam обрушили игру...",
+    "feedlabel": "PlayGround.ru - официальная группа",
+    "date": 1794412293,
+    "feedname": "PlayGround.ru - официальная группа",
+    "feed_type": 0,
+    "appid": 553850
+   },
+   {
+    "gid": "1849192144178073",
+    "title": "Devoid of Liberty: 7.2.3",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1849192144178073",
+    "is_external_url": true,
+    "author": "",
+    "contents": "Greetings, Helldivers. Today's hotfix tackles crash and bug fixes, as well as un...",
+    "feedlabel": "Community Announcements",
+    "date": 1794392410,
+    "feedname": "steam_community_announcements",
+    "feed_type": 1,
+    "appid": 553850,
+    "tags": [
+     "patchnotes"
+    ]
+   },
+   {
+    "gid": "1848664643360280",
+    "title": "Developer Blog: November 2026",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1848664643360280",
+    "is_external_url": true,
+    "author": "",
+    "contents": "Hello from Arrowhead, Helldivers! Our latest game update, Update 7.2, has been o...",
+    "feedlabel": "Community Announcements",
+    "date": 1794328293,
+    "feedname": "steam_community_announcements",
+    "feed_type": 1,
+    "appid": 553850
+   },
+   {
+    "gid": "1848664643346734",
+    "title": "Продажи Helldivers 2 превысили 23 миллиона копий",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/PlayGround.ru - официальная группа/1848664643346734",
+    "is_external_url": true,
+    "author": "",
+    "contents": "Благодаря компании Alinea Analytics стали известны весьма любопытные цифры. Рис ...",
+    "feedlabel": "PlayGround.ru - официальная группа",
+    "date": 1793984703,
+    "feedname": "PlayGround.ru - официальная группа",
+    "feed_type": 0,
+    "appid": 553850
+   },
+   {
+    "gid": "1847920302252159",
+    "title": "Helldivers 2 получила новых мутировавших терминидов и подземные логова",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/PlayGround.ru - официальная группа/1847920302252159",
+    "is_external_url": true,
+    "author": "",
+    "contents": "PlayStation и Arrowhead Game Studios представили новые угрозы для кооперативного...",
+    "feedlabel": "PlayGround.ru - официальная группа",
+    "date": 1793713992,
+    "feedname": "PlayGround.ru - официальная группа",
+    "feed_type": 0,
+    "appid": 553850
+   },
+   {
+    "gid": "1847920302251987",
+    "title": "Helldivers 2: new poisonous Terminid types, bug caves spawn across the galaxy",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302251987",
+    "is_external_url": true,
+    "author": "",
+    "contents": "Attention, Helldivers.  The Ministry of Truth confirms that a new Terminid strai...",
+    "feedlabel": "Community Announcements",
+    "date": 1793712441,
+    "feedname": "steam_community_announcements",
+    "feed_type": 1,
+    "appid": 553850
+   },
+   {
+    "gid": "1847920302241698",
+    "title": "Helldivers 2 появилась на торрентах - игру запустили через автономную сборку HellForge + Goldberg",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/PlayGround.ru - официальная группа/1847920302241698",
+    "is_external_url": true,
+    "author": "",
+    "contents": "В сети появилась неофициальная автономная сборка Helldivers 2, созданная на базе...",
+    "feedlabel": "PlayGround.ru - официальная группа",
+    "date": 1793439905,
+    "feedname": "PlayGround.ru - официальная группа",
+    "feed_type": 0,
+    "appid": 553850
+   },
+   {
+    "gid": "1847920302234123",
+    "title": "Devoid of Liberty: 7.2.2",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/steam_community_announcements/1847920302234123",
+    "is_external_url": true,
+    "author": "",
+    "contents": "*** INCOMING TRANSMISSION FROM SUPER EARTH HIGH COMMAND ***StratagemsAMW-20 APEX...",
+    "feedlabel": "Community Announcements",
+    "date": 1793268006,
+    "feedname": "steam_community_announcements",
+    "feed_type": 1,
+    "appid": 553850,
+    "tags": [
+     "patchnotes"
+    ]
+   },
+   {
+    "gid": "1847920302229098",
+    "title": "Helldivers 3 не находится в разработке",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/Gamemag.ru/1847920302229098",
+    "is_external_url": true,
+    "author": "",
+    "contents": "<strong>Arrowhead Game Studios</strong> официально подтвердила, что сейчас не разрабатывает <strong>Helld...</strong>",
+    "feedlabel": "Gamemag.ru",
+    "date": 1793143740,
+    "feedname": "Gamemag.ru",
+    "feed_type": 0,
+    "appid": 553850
+   },
+   {
+    "gid": "1847286114049060",
+    "title": "Helldivers 2 на ПК подверглась ревью-бомбингу из-за Easy Anti-Cheat, которая сломала значительную часть модов",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/PlayGround.ru - официальная группа/1847286114049060",
+    "is_external_url": true,
+    "author": "",
+    "contents": "Несмотря на то, что с момента выхода 8 февраля 2024 года игра Helldivers 2 была ...",
+    "feedlabel": "PlayGround.ru - официальная группа",
+    "date": 1793109696,
+    "feedname": "PlayGround.ru - официальная группа",
+    "feed_type": 0,
+    "appid": 553850
+   },
+   {
+    "gid": "1847286114048931",
+    "title": "Steam Global Top Sellers for week of 20 Oct — 27 October 2026",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/SteamDB/1847286114048931",
+    "is_external_url": true,
+    "author": "",
+    "contents": "<a href=\"https://steamdb.info/topsellers/2026W44/?utm_source=Steam&utm_medium=Steam&utm_campaign=SteamRSS\"> </a> * <a href=\"https://steamdb.info/app/4435490/charts/?utm_source=Steam&utm_medium=Steam&utm_campaign=SteamRSS\">Call of Duty®: Modern Warfare® 4</a>; * <a href=\"https://steamdb.info/app/4115450/charts/?utm_source=Steam&utm_medium=Steam&utm_campaign=SteamRSS\">Phantom Blade Zero</a>; * <a href=\"https://steamdb.info/app/1091500/charts/?utm_source=Steam&utm_medium=Steam&utm_campaign=SteamRSS\">Cyberpunk 2077</a>; * ...",
+    "feedlabel": "SteamDB",
+    "date": 1793091600,
+    "feedname": "SteamDB",
+    "feed_type": 0,
+    "appid": 381210
+   },
+   {
+    "gid": "1847286114037085",
+    "title": "Arrowhead не планирует Helldivers 3: \"Сиквел имеет смысл только если будет кардинально другим\"",
+    "url": "https://steamstore-a.akamaihd.net/news/externalpost/PlayGround.ru - официальная группа/1847286114037085",
+    "is_external_url": true,
+    "author": "",
+    "contents": "Йохан Пилестедт подтвердил, что планов на создание третьей части Helldivers по-п...",
+    "feedlabel": "PlayGround.ru - официальная группа",
+    "date": 1792771526,
+    "feedname": "PlayGround.ru - официальная группа",
+    "feed_type": 0,
+    "appid": 553850
+   }
+  ],
+  "count": 828
+ },
+ "_note": "Recorded from ISteamNews/GetNewsForApp/v2 (appid 553850) on 2026-11-17; author fields blanked."
+}

@@ -1,0 +1,109 @@
+{
+ "_note": "SYNTHETIC. Hand-written to match Reddit's documented Listing shape (GET /r/{sub}/new). Not real Reddit data.",
+ "kind": "Listing",
+ "data": {
+  "after": null,
+  "before": null,
+  "dist": 6,
+  "modhash": "",
+  "children": [
+   {
+    "kind": "t3",
+    "data": {
+     "name": "t3_syn001",
+     "id": "syn001",
+     "subreddit": "Helldivers",
+     "title": "Anti-cheat change feels much better",
+     "selftext": "Since the switch I get no random kicks anymore. Performance is up too.",
+     "score": 412,
+     "created_utc": 1792540800.0,
+     "author": "synthetic_user_0",
+     "author_fullname": "t2_synthetic0",
+     "num_comments": 3,
+     "permalink": "/r/Helldivers/comments/syn001/",
+     "over_18": false
+    }
+   },
+   {
+    "kind": "t3",
+    "data": {
+     "name": "t3_syn002",
+     "id": "syn002",
+     "subreddit": "Helldivers",
+     "title": "Still crashing after 7.2.1",
+     "selftext": "Game crashes on extraction every second mission. Anyone found a fix?",
+     "score": 88,
+     "created_utc": 1792627200.0,
+     "author": "synthetic_user_1",
+     "author_fullname": "t2_synthetic1",
+     "num_comments": 3,
+     "permalink": "/r/Helldivers/comments/syn002/",
+     "over_18": false
+    }
+   },
+   {
+    "kind": "t3",
+    "data": {
+     "name": "t3_syn003",
+     "id": "syn003",
+     "subreddit": "Helldivers",
+     "title": "New warbond is overpriced",
+     "selftext": "Scope of Authority costs too much for what you get.",
+     "score": 35,
+     "created_utc": 1792713600.0,
+     "author": "synthetic_user_2",
+     "author_fullname": "t2_synthetic2",
+     "num_comments": 3,
+     "permalink": "/r/Helldivers/comments/syn003/",
+     "over_18": false
+    }
+   },
+   {
+    "kind": "t3",
+    "data": {
+     "name": "t3_syn004",
+     "id": "syn004",
+     "subreddit": "Helldivers",
+     "title": "[deleted]",
+     "selftext": "[deleted]",
+     "score": 0,
+     "created_utc": 1792800000.0,
+     "author": "synthetic_user_3",
+     "author_fullname": "t2_synthetic3",
+     "num_comments": 3,
+     "permalink": "/r/Helldivers/comments/syn004/",
+     "over_18": false
+    }
+   },
+   {
+    "kind": "t3",
+    "data": {
+     "name": "t3_syn005",
+     "id": "syn005",
+     "subreddit": "Helldivers",
+     "title": "Bug caves are the best addition in months",
+     "selftext": "Diving into them with friends is chaos in the best way.",
+     "score": 901,
+     "created_utc": 1792886400.0,
+     "author": "synthetic_user_4",
+     "author_fullname": "t2_synthetic4",
+     "num_comments": 3,
+     "permalink": "/r/Helldivers/comments/syn005/",
+     "over_18": false
+    }
+   },
+   {
+    "kind": "t1",
+    "data": {
+     "name": "t1_syn100",
+     "id": "syn100",
+     "body": "Patch fixed my stutter, finally playable",
+     "score": 12,
+     "created_utc": 1792900000.0,
+     "author": "synthetic_user_9",
+     "link_id": "t3_syn001"
+    }
+   }
+  ]
+ }
+}
