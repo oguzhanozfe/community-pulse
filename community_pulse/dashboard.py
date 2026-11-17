@@ -75,6 +75,11 @@ def _events_table(res) -> str:
     return "".join(out) or "<p>No patch announcements inside the sampled range.</p>"
 
 
+def _models(res) -> str:
+    m = res.get("models") or {}
+    return f"{m.get('chat', 'an LLM')}, embeddings: {m.get('embed', 'n/a')}"
+
+
 def render(res: dict, eval_summary: dict | None = None) -> str:
     topics = "".join(
         f'<li><b>{escape(v["label"])}</b> ({v["size"]} posts) - {escape(v["description"])}'
@@ -99,7 +104,7 @@ td,th{{padding:3px 8px;border-bottom:1px solid var(--grid);text-align:right}} .t
 .too-few-posts td{{color:var(--muted)}} summary{{cursor:pointer;margin:6px 0}}
 </style></head><body>
 <h1>{escape(res['game'])}: community pulse</h1>
-<p class="muted">{res['n_posts']} sampled Steam reviews, {lo} to {hi}. Sentiment and topic labels come from a local LLM;
+<p class="muted">{res['n_posts']} sampled Steam reviews, {lo} to {hi}. Sentiment and topic names: {escape(_models(res))};
 red dashed lines are patch announcements from the official Steam news feed.</p>
 <h2>Net sentiment</h2><p class="muted">Dots: daily mean of +1 positive / 0 neutral / -1 negative. Line: 7-day rolling mean.</p>
 {_sentiment_chart(res)}
