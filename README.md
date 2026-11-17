@@ -5,6 +5,7 @@ Track what a game's players talk about and how they feel about it, lined up agai
 ## Try it
 
 **[Live dashboard: Helldivers 2, Sep to Nov 2026](https://oguzhanozfe.github.io/community-pulse/)**: a real run on 1,151 Steam reviews.
+Second example: [Cyberpunk 2077, Sep to Nov 2026](https://oguzhanozfe.github.io/community-pulse/cyberpunk2077.html) (810 reviews).
 
 [![Helldivers 2 dashboard](docs/screenshot.png)](https://oguzhanozfe.github.io/community-pulse/)
 

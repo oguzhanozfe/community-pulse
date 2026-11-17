@@ -15,4 +15,4 @@ jobs:
       - name: demo (replay mode, no key, no model)
         run: python -m community_pulse demo --out out/demo && cmp out/demo/dashboard.html examples/helldivers2/dashboard.html
       - name: published dashboard matches the example
-        run: cmp docs/index.html examples/helldivers2/dashboard.html
+        run: cmp docs/index.html examples/helldivers2/dashboard.html && cmp docs/cyberpunk2077.html examples/cyberpunk2077/dashboard.html
